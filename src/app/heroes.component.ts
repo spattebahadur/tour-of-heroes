@@ -38,5 +38,22 @@ export class HeroesComponent implements OnInit {
   gotoDetail():void{
     this.router.navigate(['detail',this.selectedHero.id]);
   }
+
+  add(name:String){
+    if (!name) { return; }
+    this.heroService.create(name);
+  }
+
+  delete(hero:Hero):void{
+  console.log("delete ")
+    let isDeleted = this.heroService.remove(hero);
+   /* console.log("YESSSSS11"+isDeleted);
+    console.log("YESSSSS222"+this.selectedHero.id===hero.id);*/
+    if(isDeleted && this.selectedHero.id===hero.id){
+      console.log("YESSSSS")
+      this.selectedHero=null;
+    }
+
+  }
 }
 

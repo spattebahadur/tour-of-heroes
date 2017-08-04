@@ -1,6 +1,6 @@
 import {Component , Input,OnInit} from '@angular/core';
 // Keep the Input import for now, you'll remove it later:
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap,Router } from '@angular/router';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
@@ -16,7 +16,7 @@ export class HeroDetailComponent implements OnInit{
 
   @Input() hero:Hero;
 
-  constructor(private route:ActivatedRoute, private location : Location,private heroService:HeroService){
+  constructor(private route:ActivatedRoute, private location : Location,private heroService:HeroService,private router:Router){
 
   }
 
@@ -34,7 +34,9 @@ export class HeroDetailComponent implements OnInit{
   }
 
   save(hero:Hero){
-
+    this.heroService.update(hero)
+   // this.router.navigate(['dashboard']);
+    this.location.back();
   }
 
 }
